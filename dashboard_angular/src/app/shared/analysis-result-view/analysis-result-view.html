@@ -1,0 +1,74 @@
+@if (result(); as r) {
+  <div class="resultado">
+
+    <!-- Cabecera con los datos de la empresa -->
+    @if (datos(); as d) {
+      <div class="cabecera-empresa">
+        <div class="cabecera-titulo">
+          <span class="material-symbols-outlined">description</span>
+          Informe de huella de carbono
+        </div>
+        <div class="cabecera-grid">
+          <div><span class="etq">Empresa</span><span>{{ d.empresa }}</span></div>
+          <div><span class="etq">Responsable</span><span>{{ d.responsable }}</span></div>
+          <div><span class="etq">Teléfono</span><span>{{ d.telefono }}</span></div>
+          <div><span class="etq">Correo</span><span>{{ d.email }}</span></div>
+        </div>
+      </div>
+    }
+
+    <!-- Veredicto -->
+    <div class="veredicto-wrap">
+      <span class="veredicto-badge {{ veredictoClase() }}">
+        <span class="material-symbols-outlined">verified</span>
+        {{ r.veredicto }}
+      </span>
+    </div>
+
+    <!-- Resumen -->
+    <div class="resumen-grid">
+      <div class="resumen-item">
+        <div class="resumen-valor">{{ r.resumen.num_dispositivos }}</div>
+        <div class="resumen-label">Equipos</div>
+      </div>
+      <div class="resumen-item">
+        <div class="resumen-valor">{{ r.resumen.total_lecturas }}</div>
+        <div class="resumen-label">Lecturas</div>
+      </div>
+      <div class="resumen-item">
+        <div class="resumen-valor">{{ r.resumen.total_kwh.toFixed(4) }}</div>
+        <div class="resumen-label">kWh totales</div>
+      </div>
+      <div class="resumen-item">
+        <div class="resumen-valor">{{ r.resumen.total_co2_kg.toFixed(4) }}</div>
+        <div class="resumen-label">kg CO₂</div>
+      </div>
+    </div>
+
+    <!-- Análisis IA -->
+    <div class="analisis-ia" [innerHTML]="analisisHtml()"></div>
+
+    <!-- Enviar por correo -->
+    <div class="acciones">
+      <button class="btn-enviar" (click)="enviarEmail()" [disabled]="enviando()">
+        @if (enviando()) {
+          <span class="spinner"></span>Enviando…
+        } @else {
+          <span class="material-symbols-outlined">mark_email_read</span>
+          Enviar resultado a Email
+        }
+      </button>
+    </div>
+
+    @if (enviado()) {
+      <div class="alert alert-ok">
+        <span class="material-symbols-outlined">check_circle</span>{{ enviado() }}
+      </div>
+    }
+    @if (error()) {
+      <div class="alert alert-error">
+        <span class="material-symbols-outlined">error</span>{{ error() }}
+      </div>
+    }
+  </div>
+}

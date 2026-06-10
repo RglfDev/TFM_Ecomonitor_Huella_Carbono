@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Arquitectura EcoMonitor</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #eef2f5;
+    color: #1f2937;
+    padding: 28px;
+    width: 1100px;
+  }
+  h1 { text-align: center; font-size: 26px; margin-bottom: 4px; color: #146c43; }
+  .sub { text-align: center; color: #6b7280; margin-bottom: 22px; font-size: 13px; }
+
+  .capa { margin-bottom: 14px; }
+  .capa-tit {
+    font-size: 12px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+    color: #6b7280; margin: 0 0 8px 4px;
+  }
+  .fila { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .box {
+    border-radius: 12px; padding: 12px 16px; min-width: 150px; color: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,.12); position: relative;
+  }
+  .box .t { font-weight: 700; font-size: 14px; display:flex; align-items:center; gap:6px;}
+  .box .d { font-size: 11.5px; opacity: .95; margin-top: 4px; line-height: 1.4; }
+  .tag { position:absolute; top:8px; right:10px; font-size:10px; font-weight:700;
+         background: rgba(255,255,255,.25); padding: 1px 7px; border-radius: 10px; }
+
+  .blue  { background: linear-gradient(135deg,#0d6efd,#4dabf7); }
+  .green { background: linear-gradient(135deg,#198754,#51cf66); }
+  .teal  { background: linear-gradient(135deg,#0ca678,#20c997); }
+  .gold  { background: linear-gradient(135deg,#f59f00,#ffd43b); color:#5c4400; }
+  .purple{ background: linear-gradient(135deg,#7048e8,#9775fa); }
+  .gray  { background: linear-gradient(135deg,#adb5bd,#ced4da); color:#495057; }
+  .navy  { background: linear-gradient(135deg,#1e3a5f,#2a5298); }
+
+  .arrow { text-align:center; color:#94a3b8; font-size:20px; line-height:1; margin:2px 0; }
+  .full { width: 100%; }
+  .center { justify-content:center; }
+  .leyenda { display:flex; gap:18px; justify-content:center; margin-top:16px; font-size:12px; color:#475569;}
+  .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+</style>
+</head>
+<body>
+  <h1>🌍 EcoMonitor — Arquitectura del proyecto</h1>
+  <div class="sub">Cálculo de la huella de carbono de equipos de oficina · TFM</div>
+
+  <!-- CAPA 1 -->
+  <div class="capa">
+    <div class="capa-tit">1 · Dispositivos (origen de datos)</div>
+    <div class="fila">
+      <div class="box blue"><span class="tag">LISTO</span>
+        <div class="t">💻 Simulador Python</div>
+        <div class="d">PC 1 + PC 2 · Flask Start/Stop<br>envío MQTT/JSON cada 30 s</div>
+      </div>
+      <div class="box gray"><span class="tag">PENDIENTE</span>
+        <div class="t">🖥️ App Node (datos reales)</div>
+        <div class="d">systeminformation · CPU%×TDP → kWh<br>dispositivos pc-real-*</div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow">▼ &nbsp; MQTT / JSON &nbsp; ▼</div>
+
+  <!-- CAPA 2 -->
+  <div class="capa">
+    <div class="capa-tit">2 · Ingesta</div>
+    <div class="fila">
+      <div class="box navy full" style="max-width:560px"><span class="tag">LISTO</span>
+        <div class="t">☁️ Azure IoT Hub — iothub-ecomonitor</div>
+        <div class="d">Recibe la telemetría de los dispositivos y la entrega (en lotes) a las funciones</div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow">▼ &nbsp; trigger automático &nbsp; ▼</div>
+
+  <!-- CAPA 3 -->
+  <div class="capa">
+    <div class="capa-tit">3 · Procesamiento — Azure Functions (.NET 8 / C#)</div>
+    <div class="fila">
+      <div class="box teal"><span class="tag">LISTO</span>
+        <div class="t">⚙️ IotHubProcessor</div>
+        <div class="d">Trigger IoT Hub<br>calcula CO₂ y guarda en Cosmos</div>
+      </div>
+      <div class="box teal"><span class="tag">LISTO</span>
+        <div class="t">🧠 CarbonFootprintAnalyzer</div>
+        <div class="d">HTTP /api/analyze<br>Cosmos + IA → informe + veredicto</div>
+      </div>
+      <div class="box teal"><span class="tag">LISTO</span>
+        <div class="t">📡 DeviceStatus</div>
+        <div class="d">HTTP /api/devices<br>equipos activos (180 s)</div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <!-- CAPA 4 -->
+  <div class="capa">
+    <div class="capa-tit">4 · Almacenamiento e Inteligencia Artificial</div>
+    <div class="fila">
+      <div class="box green"><span class="tag">LISTO</span>
+        <div class="t">🗄️ Azure SQL</div>
+        <div class="d">coeficientes_emision<br>factores MITECO</div>
+      </div>
+      <div class="box green"><span class="tag">LISTO</span>
+        <div class="t">📦 Cosmos DB</div>
+        <div class="d">lecturas (histórico)<br>con CO₂ calculado</div>
+      </div>
+      <div class="box green"><span class="tag">LISTO</span>
+        <div class="t">📄 Blob Storage</div>
+        <div class="d">PDF guía MITECO</div>
+      </div>
+      <div class="box purple"><span class="tag">LISTO</span>
+        <div class="t">🔎 AI Search</div>
+        <div class="d">normativa-index (RAG)</div>
+      </div>
+      <div class="box purple"><span class="tag">LISTO</span>
+        <div class="t">✨ Azure OpenAI</div>
+        <div class="d">GPT-4o genera el informe</div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow">▼ &nbsp; HTTP REST &nbsp; ▼</div>
+
+  <!-- CAPA 5 -->
+  <div class="capa">
+    <div class="capa-tit">5 · Presentación — Dashboard (Angular 21 + Bootstrap)</div>
+    <div class="fila">
+      <div class="box gold full" style="max-width:760px"><span class="tag" style="color:#5c4400">LISTO</span>
+        <div class="t">📊 Dashboard EcoMonitor</div>
+        <div class="d">
+          Inicio · ¿Qué es la huella? · Normativa · Historial (Power BI ⬜) · Realiza tu prueba<br>
+          Equipos detectados · animación · informe IA · descarga PDF · veredicto 🟢🟡🔴
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="leyenda">
+    <span><span class="dot" style="background:#198754"></span>Construido y verificado</span>
+    <span><span class="dot" style="background:#adb5bd"></span>Pendiente (App Node · Power BI · Despliegue)</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!-- =========================================================================
+     HERO
+     ========================================================================= -->
+<section class="hero">
+  <div class="hero-grid">
+
+    <!-- Texto -->
+    <div class="hero-text">
+      <span class="badge-gov">
+        <span class="material-symbols-outlined badge-icon">verified</span>
+        Gobierno de España &middot; MITECO
+      </span>
+
+      <h1 class="hero-title">¿Qué necesitas para la certificación?</h1>
+
+      <p class="hero-description">
+        Conoce los estándares regulatorios y ambientales necesarios para inscribir tu huella de
+        carbono y obtener el sello oficial.
+      </p>
+
+      <a routerLink="/prueba" class="btn-cta-empezar">
+        Empezar ahora
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </a>
+    </div>
+
+    <!-- Imagen con organic-mask -->
+    <div class="hero-image-wrapper">
+      <img src="/img/normativa_certificado.jpg"
+           alt="Certificado oficial de cumplimiento ambiental sobre escritorio de madera"
+           class="hero-image">
+      <div class="hero-image-overlay" aria-hidden="true"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     PROCESO DE CERTIFICACIÓN
+     ========================================================================= -->
+<section class="proceso">
+  <div class="proceso-inner">
+    <h2 class="section-title text-center">Proceso de Certificación</h2>
+
+    <div class="pasos-grid">
+      @for (p of pasos; track p.numero) {
+        <article class="paso-card">
+          <span class="paso-numero" aria-hidden="true">{{ p.numero }}</span>
+          <span class="material-symbols-outlined paso-icono">{{ p.icono }}</span>
+          <h3 class="paso-titulo">{{ p.titulo }}</h3>
+          <p class="paso-desc">{{ p.descripcion }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     REQUISITOS CLAVE + RECURSOS OFICIALES
+     ========================================================================= -->
+<section class="requisitos">
+  <div class="requisitos-grid">
+
+    <!-- Columna izquierda: requisitos -->
+    <div class="requisitos-text">
+      <h2 class="section-title">Requisitos Clave</h2>
+      <p class="requisitos-intro">
+        Para que tu huella sea válida y certificable, debe cumplir con los criterios de
+        transparencia y rigor científico establecidos por el Ministerio.
+      </p>
+
+      <ul class="requisitos-list">
+        @for (r of requisitos; track $index) {
+          <li class="requisito">
+            <span class="check-pill">
+              <span class="material-symbols-outlined">check</span>
+            </span>
+            <p [innerHTML]="r.html"></p>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Columna derecha: recursos -->
+    <div class="recursos">
+      <h3 class="recursos-title">Recursos Oficiales</h3>
+
+      @for (r of recursos; track r.url) {
+        <a [href]="r.url" target="_blank" rel="noopener" class="recurso-card">
+          <div class="recurso-info">
+            <span class="material-symbols-outlined recurso-icon">{{ r.icono }}</span>
+            <div class="recurso-text">
+              <span class="recurso-name">{{ r.titulo }}</span>
+              <span class="recurso-sub">{{ r.subtitulo }}</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined recurso-action">{{ r.iconoAccion }}</span>
+        </a>
+      }
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     CTA FINAL (sobre fondo verde corporativo)
+     ========================================================================= -->
+<section class="cta-final">
+  <div class="cta-inner">
+    <h2 class="cta-title">¿Listo para empezar tu proceso?</h2>
+    <p class="cta-text">
+      Nuestra plataforma automatiza la recopilación de datos para que cumplir con la normativa
+      sea una tarea sencilla.
+    </p>
+    <a routerLink="/prueba" class="btn-cta-blanco">
+      Realiza tu prueba ahora
+    </a>
+  </div>
+</section>

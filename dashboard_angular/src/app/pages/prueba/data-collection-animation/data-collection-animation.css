@@ -1,0 +1,74 @@
+.anim-wrapper {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.anim-scene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  height: 90px;
+}
+
+.anim-pc {
+  font-size: 2.8rem;
+  color: var(--eco-blue);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+/* Flujo de datos */
+.anim-flow {
+  display: flex;
+  gap: 8px;
+}
+
+.anim-flow .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--eco-green);
+  opacity: 0.3;
+  animation: travel 1.2s linear infinite;
+}
+
+.anim-flow .dot:nth-child(2) { animation-delay: 0.4s; }
+.anim-flow .dot:nth-child(3) { animation-delay: 0.8s; }
+
+.anim-cloud {
+  position: relative;
+  font-size: 3rem;
+  color: var(--eco-green);
+}
+
+.anim-gear {
+  position: absolute;
+  font-size: 1.1rem;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--eco-green-dark);
+  animation: spin 2s linear infinite;
+}
+
+.anim-text {
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+@keyframes travel {
+  0% { opacity: 0.2; transform: translateX(-6px); }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; transform: translateX(6px); }
+}
+
+@keyframes spin {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}

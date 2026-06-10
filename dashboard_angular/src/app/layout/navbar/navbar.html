@@ -1,0 +1,26 @@
+<nav class="eco-navbar">
+  <div class="navbar-inner">
+
+    <!-- Marca -->
+    <a routerLink="/" class="brand">EcoMonitor</a>
+
+    <!-- Toggler móvil -->
+    <button class="mobile-toggle" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNav" aria-controls="mainNav"
+            aria-expanded="false" aria-label="Abrir menú">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <div class="collapse navbar-collapse menu" id="mainNav">
+      <ul class="links">
+        <li><a class="nav-link" routerLink="/" routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: true }">Inicio</a></li>
+        <li><a class="nav-link" routerLink="/huella" routerLinkActive="active">¿Qué es la huella?</a></li>
+        <li><a class="nav-link" routerLink="/normativa" routerLinkActive="active">Normativa</a></li>
+      </ul>
+
+      <a class="cta-pill" routerLink="/prueba">Realiza tu prueba</a>
+    </div>
+
+  </div>
+</nav>

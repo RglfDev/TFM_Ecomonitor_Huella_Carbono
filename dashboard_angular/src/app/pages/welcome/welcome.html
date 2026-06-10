@@ -1,0 +1,129 @@
+<!-- =========================================================================
+     HERO
+     ========================================================================= -->
+<section class="hero">
+  <div class="hero-grid">
+
+    <!-- Columna texto -->
+    <div class="hero-text">
+      <span class="badge-metodologia">
+        <span class="material-symbols-outlined">verified</span>
+        Metodología MITECO
+      </span>
+
+      <h1 class="hero-title">
+        Mide tu impacto, <span class="hero-italic">lidera el cambio</span>
+      </h1>
+
+      <p class="hero-description">
+        Transformamos la complejidad del seguimiento de carbono en una herramienta de precisión
+        para instituciones y empresas responsables.
+      </p>
+
+      <div class="hero-actions">
+        <a routerLink="/prueba" class="btn-pill btn-pill-primary">
+          Empezar prueba
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+        <a routerLink="/huella" class="btn-pill btn-pill-outline">
+          Ver metodología
+        </a>
+      </div>
+    </div>
+
+    <!-- Columna imagen -->
+    <div class="hero-image-wrapper">
+      <div class="hero-image-bg"></div>
+      <img class="hero-image" src="/img/hero-leaf.png" alt="Hoja verde detalle natural">
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     FEATURES BENTO
+     ========================================================================= -->
+<section class="features">
+  <header class="features-header">
+    <div class="features-intro">
+      <h2 class="section-title">Gestión Inteligente de Emisiones</h2>
+      <p class="section-subtitle">
+        Soluciones diseñadas para la transparencia climática y el cumplimiento normativo riguroso.
+      </p>
+    </div>
+    <div class="features-divider" aria-hidden="true"></div>
+  </header>
+
+  <div class="cards-grid">
+    @for (c of features; track c.enlace) {
+      <article class="card-feature" [class.card-feature-dark]="c.destacada">
+        <div>
+          <div class="card-icon">
+            <span class="material-symbols-outlined">{{ c.icon }}</span>
+          </div>
+          <h3 class="card-title">{{ c.titulo }}</h3>
+          <p class="card-text">{{ c.texto }}</p>
+        </div>
+        <a [routerLink]="c.enlace" class="card-link">
+          {{ c.cta }}
+          <span class="material-symbols-outlined">east</span>
+        </a>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- =========================================================================
+     VISUAL / QUOTE
+     ========================================================================= -->
+<section class="visual-quote">
+  <div class="visual-quote-inner">
+
+    <div class="visual-image-wrapper">
+      <img class="visual-image" src="/img/hero-earth.png" alt="Red de datos sobre el planeta">
+    </div>
+
+    <div class="visual-text">
+      <span class="kicker">Tecnología con propósito</span>
+      <h2 class="section-title visual-title">Datos reales para decisiones que trascienden.</h2>
+      <blockquote class="visual-quote-text">
+        "La medición no es el fin, es el punto de partida hacia una descarbonización efectiva y rentable."
+      </blockquote>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-number">98%</span>
+          <span class="stat-label">Precisión de datos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">+1.2k</span>
+          <span class="stat-label">Empresas auditadas</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     ESTÁNDARES GLOBALES
+     ========================================================================= -->
+<section class="trust">
+  <div class="trust-inner">
+    <header class="trust-header">
+      <h2 class="section-title">Respaldado por estándares globales</h2>
+      <p class="section-subtitle">
+        Nuestra plataforma cumple íntegramente con los protocolos internacionales de reporte de emisiones.
+      </p>
+    </header>
+
+    <div class="estandares">
+      @for (e of estandares; track e.nombre) {
+        <div class="estandar">
+          <span class="material-symbols-outlined">{{ e.icono }}</span>
+          {{ e.nombre }}
+        </div>
+      }
+    </div>
+  </div>
+</section>

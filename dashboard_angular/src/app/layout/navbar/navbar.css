@@ -1,0 +1,134 @@
+/* Navbar fijo, fondo cristal lavanda */
+.eco-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1030;
+  background-color: rgba(251, 248, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(193, 200, 194, 0.3);
+  transition: all 0.3s ease;
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Marca */
+.brand {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  color: var(--eco-primary);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.brand:hover { color: var(--eco-primary); }
+
+/* Menú escritorio */
+.menu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--eco-on-surface-variant);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-link:hover { color: var(--eco-primary); }
+
+.nav-link.active {
+  color: var(--eco-primary);
+  font-weight: 700;
+  border-bottom-color: var(--eco-primary);
+}
+
+/* CTA píldora verde */
+.cta-pill {
+  background-color: var(--eco-primary);
+  color: var(--eco-on-primary);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.cta-pill:hover {
+  opacity: 0.9;
+  color: var(--eco-on-primary);
+}
+
+.cta-pill:active { transform: scale(0.96); }
+
+/* Mobile toggle */
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: var(--eco-primary);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.mobile-toggle .material-symbols-outlined { font-size: 28px; }
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .navbar-inner { padding: 0.85rem 1.25rem; }
+  .mobile-toggle { display: inline-flex; }
+
+  .menu {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(193, 200, 194, 0.3);
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  .nav-link.active { border-bottom: none; text-decoration: underline; }
+  .cta-pill { text-align: center; }
+}

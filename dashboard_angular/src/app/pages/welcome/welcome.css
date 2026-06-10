@@ -1,0 +1,465 @@
+/* ===========================================================
+   Layout
+   =========================================================== */
+:host {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  color: var(--eco-on-surface);
+}
+
+/* Tipografías comunes */
+.section-title {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--eco-primary);
+  margin: 0 0 1rem;
+}
+
+.section-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--eco-on-surface-variant);
+  margin: 0;
+}
+
+/* ===========================================================
+   HERO
+   =========================================================== */
+.hero {
+  max-width: 1200px;
+  margin: 0 auto 120px;
+  padding: 0 4rem;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 24px;
+  width: 100%;
+  align-items: center;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.badge-metodologia {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--eco-secondary-container);
+  color: var(--eco-on-secondary-container);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.badge-metodologia .material-symbols-outlined { font-size: 18px; }
+
+.hero-title {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--eco-primary);
+  margin: 0;
+  max-width: 36rem;
+}
+
+.hero-italic {
+  font-style: italic;
+  color: var(--eco-secondary);
+  font-weight: 700;
+}
+
+.hero-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--eco-on-surface-variant);
+  margin: 0;
+  max-width: 32rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Botones píldora */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn-pill-primary {
+  background-color: var(--eco-primary);
+  color: var(--eco-on-primary);
+}
+
+.btn-pill-primary:hover {
+  color: var(--eco-on-primary);
+  box-shadow: 0 12px 28px rgba(1, 45, 29, 0.18);
+}
+
+.btn-pill-primary:active { transform: scale(0.96); }
+
+.btn-pill-outline {
+  background-color: transparent;
+  color: var(--eco-on-surface);
+  border: 1px solid var(--eco-outline);
+}
+
+.btn-pill-outline:hover {
+  background-color: var(--eco-surface-low);
+  color: var(--eco-on-surface);
+}
+
+.btn-pill .material-symbols-outlined { font-size: 18px; }
+
+/* Imagen del hero con clip-path */
+.hero-image-wrapper {
+  position: relative;
+  min-height: 500px;
+  width: 100%;
+}
+
+.hero-image-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(204, 230, 208, 0.4);
+  border-radius: 4rem;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4rem;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  filter: grayscale(0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transition: filter 0.7s ease;
+}
+
+.hero-image:hover { filter: grayscale(0); }
+
+/* ===========================================================
+   FEATURES BENTO
+   =========================================================== */
+.features {
+  max-width: 1200px;
+  margin: 0 auto 120px;
+  padding: 0 4rem;
+}
+
+.features-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+}
+
+.features-intro { max-width: 36rem; }
+
+.features-divider {
+  flex: 1 1 auto;
+  height: 1px;
+  background: rgba(193, 200, 194, 0.3);
+  margin: 0 3rem 1rem;
+  min-width: 100px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.card-feature {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 320px;
+  padding: 2.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(193, 200, 194, 0.2);
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 30px rgba(27, 67, 50, 0.04);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.card-feature:hover {
+  border-color: rgba(1, 45, 29, 0.2);
+  transform: translateY(-3px);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: var(--eco-secondary-container);
+  color: var(--eco-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.card-feature:hover .card-icon { transform: scale(1.1); }
+
+.card-title {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--eco-primary);
+  margin: 0 0 1rem;
+}
+
+.card-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--eco-on-surface-variant);
+  margin: 0;
+}
+
+.card-link {
+  margin-top: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--eco-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.3s ease;
+}
+
+.card-link:hover {
+  gap: 1rem;
+  color: var(--eco-primary);
+}
+
+.card-link .material-symbols-outlined { font-size: 18px; }
+
+/* Tarjeta destacada (verde corporativo) */
+.card-feature-dark {
+  background: var(--eco-primary);
+  color: var(--eco-on-primary);
+  border: 0;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.card-feature-dark .card-icon {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--eco-on-primary);
+}
+
+.card-feature-dark .card-title { color: var(--eco-on-primary); }
+
+.card-feature-dark .card-text { color: rgba(255, 255, 255, 0.8); }
+
+.card-feature-dark .card-link { color: var(--eco-on-primary); }
+
+.card-feature-dark:hover { transform: translateY(-3px); }
+
+/* ===========================================================
+   VISUAL / QUOTE
+   =========================================================== */
+.visual-quote { margin-bottom: 120px; }
+
+.visual-quote-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: flex;
+  gap: 120px;
+  align-items: center;
+}
+
+.visual-image-wrapper {
+  width: 50%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.visual-image {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  transition: transform 1s ease;
+}
+
+.visual-image:hover { transform: scale(1.05); }
+
+.visual-text {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.kicker {
+  color: var(--eco-secondary);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.visual-title { line-height: 1.15; }
+
+.visual-quote-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  font-style: italic;
+  color: var(--eco-on-surface-variant);
+  border-left: 2px solid var(--eco-secondary);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  margin: 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.stat-number {
+  display: block;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--eco-primary);
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--eco-on-surface-variant);
+}
+
+/* ===========================================================
+   TRUST
+   =========================================================== */
+.trust {
+  background-color: var(--eco-surface-low);
+  padding: 120px 0;
+}
+
+.trust-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+.trust-header { text-align: center; margin-bottom: 4rem; }
+
+.trust-header .section-title { text-align: center; }
+
+.trust-header .section-subtitle {
+  max-width: 36rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.estandares {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  filter: grayscale(1);
+  opacity: 0.4;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+}
+
+.estandares:hover { filter: grayscale(0); opacity: 1; }
+
+.estandar {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--eco-on-surface);
+}
+
+.estandar .material-symbols-outlined { color: var(--eco-primary); font-size: 28px; }
+
+/* ===========================================================
+   Responsive
+   =========================================================== */
+@media (max-width: 991.98px) {
+  .hero { padding: 0 1.5rem; margin-bottom: 80px; min-height: auto; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-title { font-size: 32px; }
+  .hero-image-wrapper { display: none; }
+
+  .features { padding: 0 1.5rem; margin-bottom: 80px; }
+  .features-header { flex-direction: column; align-items: flex-start; }
+  .features-divider { display: none; }
+  .cards-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+  .visual-quote { margin-bottom: 80px; }
+  .visual-quote-inner { flex-direction: column; padding: 0 1.5rem; gap: 2.5rem; }
+  .visual-image-wrapper, .visual-text { width: 100%; }
+  .visual-image { height: 350px; }
+
+  .trust { padding: 80px 0; }
+  .trust-inner { padding: 0 1.5rem; }
+  .estandares { gap: 2rem; }
+  .estandar { font-size: 18px; }
+
+  .section-title { font-size: 26px; }
+}

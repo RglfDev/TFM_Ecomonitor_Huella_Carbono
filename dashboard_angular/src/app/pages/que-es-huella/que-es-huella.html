@@ -1,0 +1,153 @@
+<!-- =========================================================================
+     HERO
+     ========================================================================= -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="kicker">Guía de Sostenibilidad</span>
+    <h1 class="hero-title">¿Qué es la huella de carbono?</h1>
+    <div class="hero-rule" aria-hidden="true"></div>
+    <p class="hero-text">
+      La huella de carbono es la cantidad de gases de efecto invernadero (medidos en kg de
+      CO<sub>2</sub>) que se emiten como consecuencia de una actividad. En una oficina, gran
+      parte proviene de la electricidad que consumen los equipos informáticos.
+    </p>
+  </div>
+</section>
+
+<!-- =========================================================================
+     IMAGEN ORGÁNICA + COMPROMISO
+     ========================================================================= -->
+<section class="organic">
+  <div class="organic-grid">
+
+    <div class="organic-text">
+      <h2 class="big-title">Compromiso con el futuro digital</h2>
+      <p class="lead">
+        Fusionamos la tecnología de vanguardia con la responsabilidad ambiental para crear un
+        ecosistema empresarial regenerativo.
+      </p>
+      <div class="kicker-line">
+        <div class="kicker-bar"></div>
+        <span>Innovación Sostenible</span>
+      </div>
+    </div>
+
+    <div class="organic-image-wrapper">
+      <div class="organic-shape">
+        <img class="organic-image" src="/img/hoja_grafica.jpg" alt="Entorno eco-tech sostenible">
+        <div class="organic-overlay" aria-hidden="true"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     CÓMO SE CALCULA
+     ========================================================================= -->
+<section class="calc">
+  <div class="calc-grid">
+
+    <!-- Lado texto + fórmula -->
+    <div class="calc-text">
+      <h2 class="section-title">¿Cómo lo calcula esta aplicación?</h2>
+      <p class="calc-para">
+        Cada equipo mide cuánta energía gasta (en <strong>kWh</strong>) y lo envía de forma automática.
+        La aplicación recoge esos datos, los suma y los multiplica por un <strong>factor de emisión
+        oficial</strong> que indica cuántos kg de CO<sub>2</sub> genera cada kWh de electricidad en España.
+      </p>
+
+      <div class="formula-card">
+        <span class="material-symbols-outlined formula-icon" aria-hidden="true">calculate</span>
+        <span class="formula-kicker">Algoritmo de Precisión</span>
+        <p class="formula-text">
+          kg CO<sub>2</sub> = consumo (kWh) × factor de emisión oficial
+        </p>
+      </div>
+
+      <p class="calc-para">
+        El resultado es una estimación clara de las emisiones de tus equipos, junto con una
+        valoración de si cumples con las buenas prácticas establecidas.
+      </p>
+    </div>
+
+    <!-- Lado flujo de procesamiento (cut-corner card) -->
+    <div class="flow-card">
+      <div class="flow-head">
+        <span class="kicker">Flujo de Procesamiento</span>
+        <div class="dots" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="flow-steps">
+        @for (p of pasos; track p.numero; let i = $index) {
+          <div class="step">
+            <div class="step-icon">
+              <span class="material-symbols-outlined">{{ p.icono }}</span>
+            </div>
+            <span class="step-title">{{ p.numero }}. {{ p.titulo }}</span>
+            <p class="step-desc" [innerHTML]="p.descripcion"></p>
+          </div>
+
+          @if (i < pasos.length - 1) {
+            <div class="flow-arrow" aria-hidden="true"></div>
+          }
+        }
+      </div>
+
+      <div class="flow-info">
+        <span class="material-symbols-outlined">info</span>
+        <p>Integración en tiempo real con sensores de hardware de última generación.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     BANNER NORMATIVA
+     ========================================================================= -->
+<section class="normativa">
+  <div class="normativa-inner">
+    <div class="normativa-card">
+
+      <div class="normativa-text">
+        <div class="normativa-head">
+          <span class="material-symbols-outlined">policy</span>
+          <h3>Un cálculo conforme a la normativa</h3>
+        </div>
+        <p>
+          Este cálculo se realiza siguiendo las especificaciones del Gobierno (MITECO) para poder
+          <strong>certificarse en huella de carbono</strong>. Consulta los requisitos oficiales.
+        </p>
+      </div>
+
+      <div class="normativa-actions">
+        <div class="normativa-logos">
+          <span>MITECO</span>
+          <span>GHG Protocol</span>
+        </div>
+        <a routerLink="/normativa" class="btn-pill btn-pill-primary">
+          Ver normativa
+          <span class="material-symbols-outlined">open_in_new</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     CTA FINAL
+     ========================================================================= -->
+<section class="final-cta">
+  <div class="final-inner">
+    <div class="final-glow" aria-hidden="true"></div>
+    <a routerLink="/prueba" class="final-button">
+      <span class="material-symbols-outlined">play_circle</span>
+      Realiza tu prueba ahora
+    </a>
+    <p class="final-tagline">Empieza hoy tu camino a la descarbonización</p>
+  </div>
+</section>

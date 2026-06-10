@@ -1,0 +1,365 @@
+/* =====================================================
+   Paleta corporativa (alineada con dashboard_angular)
+   ===================================================== */
+:root {
+  --eco-primary: #012d1d;
+  --eco-primary-soft: #1b4332;
+  --eco-secondary-container: #cce6d0;
+  --eco-on-secondary-fixed-variant: #354c3b;
+  --eco-on-secondary-container: #506856;
+  --eco-tertiary-fixed: #c0edd0;
+  --eco-tertiary-fixed-dim: #a4d1b4;
+  --eco-on-tertiary-container: #84b095;
+  --eco-on-primary-fixed: #002114;
+  --eco-on-primary-fixed-variant: #274e3d;
+  --eco-surface: #fbf8ff;
+  --eco-surface-low: #f4f2ff;
+  --eco-surface-container-high: #e6e6ff;
+  --eco-on-surface: #181a2e;
+  --eco-on-surface-variant: #414844;
+  --eco-outline: #717973;
+  --eco-outline-variant: #c1c8c2;
+}
+
+body {
+  background: var(--eco-surface);
+  color: var(--eco-on-surface);
+  font-family: 'Inter', sans-serif;
+}
+
+/* =====================================================
+   CABECERA DE PÁGINA
+   ===================================================== */
+.page-title {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: -0.01em;
+  color: var(--eco-primary);
+}
+
+.page-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  color: var(--eco-on-surface-variant);
+  max-width: 42rem;
+}
+
+/* =====================================================
+   MONITOR + TERMINAL OVERLAY
+   ===================================================== */
+.pc-frame-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.78 / 1;
+  margin-bottom: 1.5rem;
+}
+
+.pc-frame {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: block;
+}
+
+/* Recorte de la pantalla del monitor — ajustado a la imagen prueba_pc.jpg */
+.terminal-overlay {
+  position: absolute;
+  top: 26%;
+  left: 31.2%;
+  width: 37.6%;
+  height: 41%;
+  background: #002114;
+  border-radius: 2px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+  transition: background 0.4s ease;
+}
+
+/* Pantalla apagada (negro) cuando el simulador está parado */
+.terminal-overlay.off {
+  background: #0a0a0a;
+}
+
+.terminal-overlay.off .terminal-header,
+.terminal-overlay.off .terminal-content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.terminal-overlay.off::after {
+  content: '⏻';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2a2a2a;
+  font-size: 1.5rem;
+  animation: standby-blink 4s ease-in-out infinite;
+}
+
+@keyframes standby-blink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.15; }
+}
+
+.terminal-header {
+  background: #092012;
+  padding: 0.35rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #274e3d;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  transition: opacity 0.4s ease;
+}
+
+.terminal-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--eco-tertiary-fixed);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--eco-tertiary-fixed);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.terminal-id { color: rgba(132, 176, 149, 0.6); }
+
+.terminal-content {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  line-height: 1.55;
+  color: var(--eco-tertiary-fixed-dim);
+  text-shadow: 0 0 6px rgba(165, 208, 185, 0.35);
+  overflow-y: auto;
+  transition: opacity 0.4s ease;
+}
+
+.terminal-content::-webkit-scrollbar { width: 3px; }
+.terminal-content::-webkit-scrollbar-track { background: #002114; }
+.terminal-content::-webkit-scrollbar-thumb {
+  background: #274e3d;
+  border-radius: 2px;
+}
+
+.terminal-line { padding: 0; }
+.terminal-line.dim   { opacity: 0.5; }
+.terminal-line.info  { color: #80c8ff; opacity: 0.85; }
+.terminal-line.sent  { color: var(--eco-tertiary-fixed); }
+.terminal-line.warn  { color: #ffc107; }
+.terminal-line.error { color: #ff7474; }
+
+/* =====================================================
+   STATS CARD (controles + métricas)
+   ===================================================== */
+.stats-card {
+  background: #ffffff;
+  padding: 1.75rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(27, 67, 50, 0.04);
+  border: 1px solid var(--eco-secondary-container);
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stats-pc-name {
+  display: inline-block;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--eco-primary);
+  margin-right: 0.5rem;
+}
+
+.stats-badge {
+  display: inline-block;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  background: var(--eco-secondary-container);
+  color: var(--eco-on-secondary-fixed-variant);
+}
+
+.stats-badge.stopped {
+  background: #e9eaec;
+  color: #6c757d;
+}
+
+.stats-badge.error {
+  background: #ffdad6;
+  color: #93000a;
+}
+
+.stats-zone {
+  color: var(--eco-on-surface-variant);
+  font-size: 14px;
+  margin: 0.35rem 0 0;
+}
+
+.stats-controls {
+  display: inline-flex;
+  gap: 0.6rem;
+}
+
+.control-button {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.control-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.control-button i { font-size: 22px; }
+
+.control-button.start {
+  background: var(--eco-primary);
+  color: #fff;
+  border: 0;
+}
+
+.control-button.start:hover:not(:disabled) {
+  box-shadow: 0 10px 22px rgba(1, 45, 29, 0.25);
+}
+
+.control-button.stop {
+  background: #ffffff;
+  color: var(--eco-on-surface);
+  border: 1px solid var(--eco-outline);
+}
+
+.control-button.stop:hover:not(:disabled) {
+  background: var(--eco-surface-container-high);
+}
+
+.control-button:active:not(:disabled) { transform: scale(0.94); }
+
+/* Métricas inferiores */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--eco-outline-variant);
+}
+
+.stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--eco-on-surface-variant);
+  margin: 0 0 0.25rem;
+}
+
+.stat-value {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--eco-primary);
+  margin: 0;
+}
+
+.stat-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--eco-on-surface-variant);
+}
+
+.warn-config {
+  margin-top: 1rem;
+  background: rgba(255, 193, 7, 0.12);
+  border: 1px solid rgba(255, 193, 7, 0.5);
+  color: #856404;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 12px;
+}
+
+/* =====================================================
+   FOOTER (simple, sin links)
+   ===================================================== */
+.eco-footer {
+  background: #ffffff;
+  border-top: 1px solid var(--eco-outline-variant);
+  margin-top: 6rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  padding: 2.5rem 1.5rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--eco-primary);
+}
+
+.footer-tag {
+  margin: 0.4rem 0 0;
+  font-size: 13px;
+  color: var(--eco-on-surface-variant);
+}
+
+/* =====================================================
+   Responsive
+   ===================================================== */
+@media (max-width: 991.98px) {
+  .stats-card { padding: 1.5rem; }
+}
+
+@media (max-width: 575.98px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stats-header { flex-direction: column; align-items: stretch; }
+  .stats-controls { justify-content: flex-end; }
+  .terminal-content { font-size: 8.5px; }
+}

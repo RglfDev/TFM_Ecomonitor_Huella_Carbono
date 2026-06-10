@@ -1,0 +1,37 @@
+# =====================================================================
+# EcoMonitor TFM - .gitignore
+# Se suben solo: azure_function/, dashboard_angular/, simulacion_Node/
+# =====================================================================
+
+# ===== Dependencias y compilados =====
+node_modules/
+dist/
+.angular/
+bin/
+obj/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ===== SECRETOS / configuracion local (NUNCA subir) =====
+# Azure Functions (contiene todas las connection strings y claves)
+local.settings.json
+# Simulador Node (connection strings de los dispositivos)
+.env
+# Angular produccion (contiene la functionKey)
+environment.prod.ts
+
+# ===== Artefactos de publicacion de Visual Studio =====
+**/Properties/
+*.pubxml
+*.pubxml.user
+.vs/
+
+# ===== Tooling del editor / Claude =====
+.vscode/
+.claude/
+
+# ===== Sistema operativo =====
+Thumbs.db
+.DS_Store

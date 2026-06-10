@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>EcoMonitor · Node</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap 5 + Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <main class="container py-5" style="max-width: 1200px;">
+
+    <!-- Cabecera -->
+    <div class="mb-5">
+      <h1 class="page-title mb-2">EcoMonitor · Node</h1>
+      <p class="page-subtitle mb-0">
+        Simulador IoT para huella de carbono en oficinas · envío cada <%= interval %>s
+      </p>
+    </div>
+
+    <!-- Grid de dispositivos -->
+    <div class="row g-4">
+      <% devices.forEach(function(d) { %>
+        <div class="col-lg-6">
+
+          <!-- Marco del monitor + pantalla con terminal -->
+          <div class="pc-frame-wrapper" data-device-id="<%= d.device_id %>">
+            <img src="/img/prueba_pc.jpg" alt="Monitor" class="pc-frame">
+
+            <div class="terminal-overlay off" data-role="terminal">
+              <div class="terminal-header">
+                <span class="terminal-status">
+                  <span class="status-dot"></span>
+                  Live Stream
+                </span>
+                <span class="terminal-id">ID: <%= d.device_id %></span>
+              </div>
+              <div class="terminal-content" data-role="log">
+                <div class="terminal-line dim">[--:--:--] Esperando inicio…</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta de control y métricas -->
+          <div class="stats-card" data-device-id="<%= d.device_id %>">
+            <div class="stats-header">
+              <div>
+                <h3 class="stats-pc-name"><%= d.display_name %></h3>
+                <span class="stats-badge stopped" data-role="badge">PARADO</span>
+                <p class="stats-zone">Zona: <%= d.zona %></p>
+              </div>
+              <div class="stats-controls">
+                <button class="control-button start <%= d.configured ? '' : 'perm-disabled' %>"
+                        data-role="start"
+                        <%= d.configured ? '' : 'disabled' %>
+                        title="Iniciar envío">
+                  <i class="bi bi-play-fill"></i>
+                </button>
+                <button class="control-button stop" data-role="stop" disabled title="Parar envío">
+                  <i class="bi bi-stop-fill"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="stats-grid">
+              <div>
+                <p class="stat-label">Mensajes enviados</p>
+                <p class="stat-value" data-role="count">0</p>
+              </div>
+              <div>
+                <p class="stat-label">Último consumo</p>
+                <p class="stat-value">
+                  <span data-role="last-kwh">—</span>
+                  <span class="stat-unit">kWh</span>
+                </p>
+              </div>
+              <div>
+                <p class="stat-label">Última potencia</p>
+                <p class="stat-value">
+                  <span data-role="last-w">—</span>
+                  <span class="stat-unit">W</span>
+                </p>
+              </div>
+            </div>
+
+            <% if (!d.configured) { %>
+              <div class="warn-config">
+                <i class="bi bi-exclamation-triangle me-1"></i>
+                Connection string no configurada. Revisa el archivo <code>.env</code>.
+              </div>
+            <% } %>
+          </div>
+
+        </div>
+      <% }); %>
+    </div>
+
+  </main>
+
+  <!-- FOOTER simple -->
+  <footer class="eco-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">EcoMonitor</div>
+      <p class="footer-tag">© 2026 EcoMonitor · Simulador IoT (Node.js + TypeScript)</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS + Socket.IO -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Lógica del simulador -->
+  <script src="/app.js"></script>
+</body>
+</html>

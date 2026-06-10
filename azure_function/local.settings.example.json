@@ -1,0 +1,30 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+
+    "IoTHubConnection": "<Endpoint compatible con Event Hub del IoT Hub>",
+    "IoTHubEventHubName": "<nombre del Event Hub integrado del IoT Hub>",
+
+    "CosmosDBConnection": "<connection string de Cosmos DB>",
+
+    "SqlDbConnection": "<connection string de Azure SQL>",
+
+    "AiSearchEndpoint": "https://<tu-search>.search.windows.net",
+    "AiSearchKey": "<clave de Azure AI Search>",
+    "AiSearchIndexName": "normativa-index",
+
+    "OpenAiEndpoint": "https://<tu-recurso>.services.ai.azure.com/",
+    "OpenAiKey": "<clave de Azure OpenAI>",
+    "OpenAiDeploymentChat": "gpt-4o-ecomonitor",
+    "OpenAiDeploymentEmbedding": "embedding-ecomonitor",
+
+    "PowerAutomateUrl": "<URL del flujo HTTP de Power Automate>",
+    "PowerBiPublicUrl": "<URL del informe de Power BI>"
+  },
+  "Host": {
+    "CORS": "*",
+    "CORSCredentials": false
+  }
+}

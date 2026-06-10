@@ -1,0 +1,237 @@
+<!-- =========================================================================
+     HERO
+     ========================================================================= -->
+<section class="hero">
+  <div class="hero-grid">
+
+    <div class="hero-text">
+      <h1 class="hero-title">Realiza tu prueba</h1>
+      <p class="hero-description">
+        Comienza el proceso de validación ambiental de tu empresa. A través de este simulador,
+        podrás obtener una visión preliminar de tu impacto ecológico y asegurar el cumplimiento
+        con las normativas vigentes en un entorno seguro y controlado.
+      </p>
+
+      <div class="hero-badges">
+        <span class="badge badge-soft">
+          <span class="material-symbols-outlined">verified</span>
+          Precisión Certificada
+        </span>
+        <span class="badge badge-light">
+          <span class="material-symbols-outlined">bolt</span>
+          Resultados Instantáneos
+        </span>
+      </div>
+    </div>
+
+    <div class="hero-image-wrapper">
+      <img src="/img/prueba_simulacion.png"
+           alt="Laboratorio eco-tecnológico con dashboards ambientales"
+           class="hero-image">
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================================================
+     FORMULARIO — Datos de la empresa
+     ========================================================================= -->
+@if (paso() === 'formulario') {
+  <section class="form-section">
+    <div class="form-card">
+      <h2 class="section-title text-center">Introduce tus datos</h2>
+
+      <form class="form-grid" (submit)="$event.preventDefault(); siguiente()">
+
+        <div class="form-field">
+          <label>Nombre de la empresa</label>
+          <input type="text" placeholder="Ej: EcoInnovación S.L."
+                 [value]="datosEmpresa.empresa()"
+                 (input)="set(datosEmpresa.empresa, $event)">
+        </div>
+
+        <div class="form-field">
+          <label>Nombre del responsable</label>
+          <input type="text" placeholder="Nombre completo"
+                 [value]="datosEmpresa.responsable()"
+                 (input)="set(datosEmpresa.responsable, $event)">
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>Email corporativo</label>
+            <input type="email" placeholder="email@empresa.com"
+                   [class.invalid]="datosEmpresa.email().length > 0 && !datosEmpresa.emailValido()"
+                   [value]="datosEmpresa.email()"
+                   (input)="set(datosEmpresa.email, $event)">
+          </div>
+
+          <div class="form-field">
+            <label>Teléfono</label>
+            <input type="tel" placeholder="+34 000 000 000"
+                   [value]="datosEmpresa.telefono()"
+                   (input)="set(datosEmpresa.telefono, $event)">
+          </div>
+        </div>
+
+        <label class="form-check">
+          <input type="checkbox"
+                 [checked]="datosEmpresa.acepta()"
+                 (change)="setAcepta($event)">
+          <span>
+            He leído y acepto la Política de Privacidad y el tratamiento de mis datos para el
+            diagnóstico de la huella ecológica.
+          </span>
+        </label>
+
+        <button type="submit" class="btn-siguiente"
+                [class.activo]="datosEmpresa.valido()"
+                [disabled]="!datosEmpresa.valido()">
+          Siguiente
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+
+      </form>
+    </div>
+  </section>
+}
+
+<!-- =========================================================================
+     SECCIÓN DE PRUEBAS — 3 tabs (Sim / OK / KO)
+     ========================================================================= -->
+@if (paso() === 'pruebas') {
+  <section class="tests-section">
+    <div class="tests-card">
+
+      <header class="tests-header">
+        <button class="back-link" (click)="volverAlFormulario()" type="button">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Editar datos
+        </button>
+        <h2 class="section-title text-center">Sección de Pruebas</h2>
+        <p class="tests-subtitle">Selecciona el tipo de entorno para tu prueba diagnóstica.</p>
+      </header>
+
+      <!-- Pestañas -->
+      <div class="tabs">
+        @for (t of tabs; track t.key) {
+          <button class="tab-btn" type="button"
+                  [class.active]="tabActiva() === t.key"
+                  (click)="cambiarTab(t.key)">
+            {{ t.tabLabel }}
+          </button>
+        }
+      </div>
+
+      <!-- Panel del tab activo -->
+      @if (tabActual(); as tab) {
+        <div class="tab-panel">
+
+          <div class="tab-text">
+            <h3 class="tab-title">{{ tab.titulo }}</h3>
+            <p class="tab-desc">{{ tab.descripcion }}</p>
+
+            <!-- Features -->
+            <ul class="features">
+              @for (f of tab.features; track f) {
+                <li>
+                  <span class="material-symbols-outlined">check_circle</span>
+                  {{ f }}
+                </li>
+              }
+            </ul>
+
+            <!-- Equipos detectados (solo Simulación) -->
+            @if (tab.key === 'sim') {
+              <div class="equipos">
+                <div class="equipos-head">
+                  <h4>
+                    <span class="material-symbols-outlined">hub</span>
+                    Equipos detectados
+                  </h4>
+                  <button class="btn-refrescar" type="button"
+                          (click)="cargarDispositivos()"
+                          [disabled]="cargandoDispositivos()">
+                    <span class="material-symbols-outlined"
+                          [class.girar]="cargandoDispositivos()">refresh</span>
+                  </button>
+                </div>
+
+                @if (cargandoDispositivos()) {
+                  <p class="equipos-msg">Buscando equipos…</p>
+                } @else if (dispositivos().length > 0) {
+                  <ul class="equipos-list">
+                    @for (d of dispositivos(); track d.deviceId) {
+                      <li>
+                        <span class="dot"></span>
+                        <span class="equipo-nombre">{{ d.displayName }}</span>
+                        <small>{{ d.lecturas }} lecturas · {{ hora(d.lastSeen) }}</small>
+                      </li>
+                    }
+                  </ul>
+                } @else {
+                  <p class="equipos-msg">
+                    <span class="material-symbols-outlined">info</span>
+                    No hay equipos enviando datos. Arranca el simulador (Python o Node) y pulsa
+                    refrescar.
+                  </p>
+                }
+              </div>
+            }
+
+            <!-- Botón Iniciar prueba -->
+            <button class="btn-iniciar" type="button"
+                    (click)="iniciarPrueba()"
+                    [disabled]="ejecutando() || (tab.key === 'sim' && dispositivos().length === 0)">
+              <span class="material-symbols-outlined">play_arrow</span>
+              {{ ejecutando() ? 'Generando informe…' : 'Iniciar prueba' }}
+            </button>
+
+            @if (tab.key === 'sim' && !cargandoDispositivos() && dispositivos().length === 0) {
+              <p class="hint-sin-equipos">
+                <span class="material-symbols-outlined">info</span>
+                Se necesita al menos un equipo enviando datos para iniciar la prueba.
+              </p>
+            }
+          </div>
+
+          <div class="tab-image-wrapper">
+            <img [src]="tab.imagen" [alt]="tab.titulo" class="tab-image">
+          </div>
+
+        </div>
+      }
+
+      <!-- Estado de ejecución / resultado -->
+      <div class="resultado-wrapper">
+
+        @if (ejecutando()) {
+          <app-data-collection-animation
+            mensaje="Recogiendo datos y generando el informe con IA…" />
+        }
+
+        @if (error()) {
+          <div class="alert-error">
+            <span class="material-symbols-outlined">error</span>{{ error() }}
+          </div>
+        }
+
+        @if (sinDatos()) {
+          <div class="alert-info">
+            <span class="material-symbols-outlined">info</span>
+            No se encontraron lecturas para analizar en el día actual.
+          </div>
+        }
+
+        @if (resultado(); as r) {
+          <app-analysis-result-view
+            [result]="r"
+            [origenLabel]="tabActual().origenLabel"
+            [datos]="datosUsados()" />
+        }
+
+      </div>
+
+    </div>
+  </section>
+}
